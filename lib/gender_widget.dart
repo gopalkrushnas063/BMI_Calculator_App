@@ -31,28 +31,29 @@ class _GenderWidgetState extends State<GenderWidget> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ChoiceChip3D(
-              border: Border.all(color: Colors.grey),
-              style: _gender == 1 ? selectedStyle : unselectedStyle,
-              onSelected: () {
-                setState(() {
-                  _gender = 1;
-                });
-                widget.onChange(_gender);
-              },
-              onUnSelected: () {},
-              selected: _gender == 1,
-              child: Column(
-                children: [
-                  Image.asset(
+            border: Border.all(color: Colors.grey),
+            style: _gender == 1 ? selectedStyle : unselectedStyle,
+            onSelected: () {
+              setState(() {
+                _gender = 1;
+              });
+              widget.onChange(_gender);
+            },
+            onUnSelected: () {},
+            selected: _gender == 1,
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image.asset(
                     "assets/images/man.png",
                     width: 50,
                   ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  const Text("Male")
-                ],
-              )),
+                ),
+                const Text("Male"),
+              ],
+            ),
+          ),
           const SizedBox(
             width: 20,
           ),
@@ -69,12 +70,12 @@ class _GenderWidgetState extends State<GenderWidget> {
               onUnSelected: () {},
               child: Column(
                 children: [
-                  Image.asset(
-                    "assets/images/woman.png",
-                    width: 50,
-                  ),
-                  const SizedBox(
-                    height: 5,
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      "assets/images/woman.png",
+                      width: 50,
+                    ),
                   ),
                   const Text("Female")
                 ],

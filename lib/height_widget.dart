@@ -14,16 +14,18 @@ class _HeightWidgetState extends State<HeightWidget> {
 
   @override
   Widget build(BuildContext context) {
+    Color baseColor = const Color(0xFFF2F2F2);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Card(
+        color: baseColor,
           elevation: 12,
-          shape: const RoundedRectangleBorder(),
+          shape:  RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           child: Column(
             children: [
               const Text(
                 "Height",
-                style: TextStyle(fontSize: 25, color: Colors.grey),
+                style: TextStyle(fontSize: 25, color: Colors.black),
               ),
               const SizedBox(
                 height: 10,
@@ -40,7 +42,7 @@ class _HeightWidgetState extends State<HeightWidget> {
                   ),
                   const Text(
                     "cm",
-                    style: TextStyle(fontSize: 20, color: Colors.grey),
+                    style: TextStyle(fontSize: 20, color: Colors.black),
                   )
                 ],
               ),
@@ -48,7 +50,7 @@ class _HeightWidgetState extends State<HeightWidget> {
                 min: 0,
                 max: 240,
                 value: _height.toDouble(),
-                thumbColor: Colors.red,
+                thumbColor: Colors.orange,
                 onChanged: (value) {
                   setState(() {
                     _height = value.toInt();

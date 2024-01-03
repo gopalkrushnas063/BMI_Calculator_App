@@ -37,14 +37,17 @@ class _AgeWeightWidgetState extends State<AgeWeightWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Card(
-            elevation: 12,
-            shape: const RoundedRectangleBorder(),
-            child: Column(children: [
+      padding: const EdgeInsets.all(8.0),
+      child: Card(
+        elevation: 12,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
               Text(
                 widget.title,
-                style: const TextStyle(fontSize: 20, color: Colors.grey),
+                style: const TextStyle(fontSize: 20, color: Colors.black),
               ),
               const SizedBox(
                 height: 10,
@@ -56,7 +59,7 @@ class _AgeWeightWidgetState extends State<AgeWeightWidget> {
                     InkWell(
                       child: const CircleAvatar(
                         radius: 12,
-                        backgroundColor: Colors.blue,
+                        backgroundColor: Colors.red,
                         child: Icon(Icons.remove, color: Colors.white),
                       ),
                       onTap: () {
@@ -85,7 +88,7 @@ class _AgeWeightWidgetState extends State<AgeWeightWidget> {
                     InkWell(
                       child: const CircleAvatar(
                         radius: 12,
-                        backgroundColor: Colors.blue,
+                        backgroundColor: Colors.green,
                         child: Icon(Icons.add, color: Colors.white),
                       ),
                       onTap: () {
@@ -100,6 +103,10 @@ class _AgeWeightWidgetState extends State<AgeWeightWidget> {
                   ],
                 ),
               )
-            ])));
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
