@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:pretty_gauge/pretty_gauge.dart';
@@ -22,8 +24,46 @@ class ScoreScreen extends StatefulWidget {
   _ScoreScreenState createState() => _ScoreScreenState();
 }
 
-class _ScoreScreenState extends State<ScoreScreen> {
+class _ScoreScreenState extends State<ScoreScreen>
+    with SingleTickerProviderStateMixin {
   final GlobalKey _key = GlobalKey();
+  late AnimationController _animationController;
+  late Animation<double> _needleAnimation;
+  late Animation<double> _scoreAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _animationController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 2), // Animation duration
+    );
+
+    _needleAnimation = Tween<double>(
+      begin: 0.0,
+      end: widget.bmiScore,
+    ).animate(_animationController)
+      ..addListener(() {
+        setState(() {});
+      });
+
+    _scoreAnimation = Tween<double>(
+      begin: 0.0,
+      end: widget.bmiScore,
+    ).animate(_animationController)
+      ..addListener(() {
+        setState(() {});
+      });
+
+    _animationController.forward(); // Start the animations
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,10 +101,10 @@ class _ScoreScreenState extends State<ScoreScreen> {
                     GaugeSegment('Obese', 10.1, Colors.pink),
                   ],
                   valueWidget: Text(
-                    widget.bmiScore.toStringAsFixed(1),
+                    _needleAnimation.value.toStringAsFixed(1),
                     style: const TextStyle(fontSize: 40),
                   ),
-                  currentValue: widget.bmiScore.toDouble(),
+                  currentValue: _needleAnimation.value,
                   needleColor: Colors.blue,
                 ),
                 const SizedBox(
@@ -98,19 +138,22 @@ class _ScoreScreenState extends State<ScoreScreen> {
                     ),
                     ElevatedButton(
                       onPressed: () async {
-                        RenderRepaintBoundary boundary =
-                            _key.currentContext!.findRenderObject() as RenderRepaintBoundary;
+                        RenderRepaintBoundary boundary = _key.currentContext!
+                            .findRenderObject() as RenderRepaintBoundary;
                         ui.Image image = await boundary.toImage();
-                        ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+                        ByteData? byteData = await image.toByteData(
+                            format: ui.ImageByteFormat.png);
 
                         if (byteData != null) {
                           Uint8List pngBytes = byteData.buffer.asUint8List();
                           final tempDir = (await getTemporaryDirectory()).path;
-                          final file = await new File('$tempDir/screenshot.png').create();
+                          final file = await new File('$tempDir/screenshot.png')
+                              .create();
                           await file.writeAsBytes(pngBytes);
 
                           Share.shareFiles(['$tempDir/screenshot.png'],
-                              text: "Your BMI is ${widget.bmiScore.toStringAsFixed(1)} at age ${widget.age}");
+                              text:
+                                  "Your BMI is ${widget.bmiScore.toStringAsFixed(1)} at age ${widget.age}");
                         }
                       },
                       child: const Text("Share"),
