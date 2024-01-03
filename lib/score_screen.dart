@@ -5,7 +5,6 @@ import 'package:share_plus/share_plus.dart';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/services.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 

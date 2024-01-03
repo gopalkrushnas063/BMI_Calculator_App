@@ -41,45 +41,45 @@ class _GenderWidgetState extends State<GenderWidget> {
             },
             onUnSelected: () {},
             selected: _gender == 1,
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Image.asset(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Image.asset(
                     "assets/images/man.png",
                     width: 50,
                   ),
-                ),
-                const Text("Male"),
-              ],
+                  const Text("Male"),
+
+                ],
+              ),
             ),
           ),
           const SizedBox(
             width: 20,
           ),
           ChoiceChip3D(
-              border: Border.all(color: Colors.grey),
-              style: _gender == 2 ? selectedStyle : unselectedStyle,
-              onSelected: () {
-                setState(() {
-                  _gender = 2;
-                });
-                widget.onChange(_gender);
-              },
-              selected: _gender == 2,
-              onUnSelected: () {},
+            border: Border.all(color: Colors.grey),
+            style: _gender == 2 ? selectedStyle : unselectedStyle,
+            onSelected: () {
+              setState(() {
+                _gender = 2;
+              });
+              widget.onChange(_gender);
+            },
+            selected: _gender == 2,
+            onUnSelected: () {},
+            child: SingleChildScrollView(
               child: Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Image.asset(
-                      "assets/images/woman.png",
-                      width: 50,
-                    ),
+                  Image.asset(
+                    "assets/images/woman.png",
+                    width: 50,
                   ),
-                  const Text("Female")
+                  const Text("Female"),
                 ],
-              ))
+              ),
+            ),
+          ),
         ],
       ),
     );
