@@ -217,6 +217,9 @@ class _ScoreScreenState extends State<ScoreScreen>
                       },
                       child: const Text("Share"),
                     ),
+                    const SizedBox(
+                      width: 10,
+                    ),
                     ElevatedButton(
                       onPressed: () {
                         Navigator.push(
