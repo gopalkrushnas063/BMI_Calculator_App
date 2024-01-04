@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:clay_containers/clay_containers.dart';
+
 
 class HeightWidget extends StatefulWidget {
   final Function(int) onChange;
@@ -17,10 +19,9 @@ class _HeightWidgetState extends State<HeightWidget> {
     Color baseColor = const Color(0xFFF2F2F2);
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Card(
+      child: ClayContainer(
         color: baseColor,
-          elevation: 12,
-          shape:  RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          borderRadius: 12,
           child: Column(
             children: [
               const Text(

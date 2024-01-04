@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:bmi_calculator_app/info_grid.dart';
+import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:pretty_gauge/pretty_gauge.dart';
@@ -13,12 +15,21 @@ import 'dart:io';
 class ScoreScreen extends StatefulWidget {
   final double bmiScore;
   final int age;
+  final int gender;
+  final int height;
+  final int weight;
   String? bmiStatus;
   String? bmiInterpretation;
   Color? bmiStatusColor;
 
-  ScoreScreen({Key? key, required this.bmiScore, required this.age})
-      : super(key: key);
+  ScoreScreen({
+    Key? key,
+    required this.bmiScore,
+    required this.age,
+    required this.gender,
+    required this.height,
+    required this.weight,
+  }) : super(key: key);
 
   @override
   _ScoreScreenState createState() => _ScoreScreenState();
@@ -67,22 +78,37 @@ class _ScoreScreenState extends State<ScoreScreen>
 
   @override
   Widget build(BuildContext context) {
+    Color baseColor = const Color(0xFFF2F2F2);
     setBmiInterpretation();
     return RepaintBoundary(
       key: _key,
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: baseColor,
           centerTitle: true,
           title: const Text("BMI Score"),
         ),
         body: Container(
+          color: baseColor,
           padding: const EdgeInsets.all(12),
-          child: Card(
-            elevation: 12,
-            shape: const RoundedRectangleBorder(),
+          child: ClayContainer(
+            borderRadius: 12,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+               
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Container(
+                    height: 300,
+                    child: MyGridView(
+                      age: widget.age,
+                      height: widget.height,
+                      weight: widget.weight,
+                      gender: widget.gender,
+                    ),
+                  ),
+                ),
                 const Text(
                   "Your Score",
                   style: TextStyle(fontSize: 30, color: Colors.blue),

@@ -31,11 +31,8 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(5),
-          child: Card(
+          child: Container(
             color: baseColor,
-            elevation: 12,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             child: Column(
               children: [
                 const SizedBox(height: 200),
@@ -82,6 +79,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: ScoreScreen(
                                   bmiScore: _bmiScore,
                                   age: _age,
+                                  gender: _gender,
+                                  height: _height,
+                                  weight: _weight,
                                 ),
                                 type: PageTransitionType.fade));
 

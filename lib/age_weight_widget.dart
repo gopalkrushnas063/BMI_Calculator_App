@@ -1,3 +1,4 @@
+import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
 
 class AgeWeightWidget extends StatefulWidget {
@@ -29,18 +30,18 @@ class _AgeWeightWidgetState extends State<AgeWeightWidget> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     counter = widget.initValue;
   }
 
   @override
   Widget build(BuildContext context) {
+    Color baseColor = const Color(0xFFF2F2F2);
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Card(
-        elevation: 12,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      child: ClayContainer(
+        color: baseColor,
+        borderRadius: 30,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
