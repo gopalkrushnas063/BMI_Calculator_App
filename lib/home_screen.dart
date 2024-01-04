@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return  Scaffold(
       body: _pages[_currentIndex],
       bottomNavigationBar: ConvexAppBar(
-        backgroundColor: Colors.lightGreen,
+        backgroundColor: Colors.indigo,
         items: [
           TabItem(icon: Icons.home, title: 'Home'),
           TabItem(icon: Icons.assignment, title: 'BMI History'),
