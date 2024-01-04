@@ -102,7 +102,7 @@ class _BMIHomePageState extends State<BMIHomePage> {
                           });
                         });
                       },
-                      activeColor: Colors.orange,
+                      activeColor: Colors.indigo,
                       buttonWidget: const Icon(
                         Icons.arrow_forward_ios_rounded,
                         color: Colors.black,
