@@ -15,7 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
-    BMIHomePage(),
+    const BMIHomePage(),
     BMIHistoryPage(),
   ];
 
@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: _pages[_currentIndex],
       bottomNavigationBar: ConvexAppBar(
         backgroundColor: Colors.indigo,
-        items: [
+        items: const [
           TabItem(icon: Icons.home, title: 'Home'),
           TabItem(icon: Icons.assignment, title: 'BMI History'),
         ],
