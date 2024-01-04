@@ -24,6 +24,7 @@ class _HeightWidgetState extends State<HeightWidget> {
           borderRadius: 12,
           child: Column(
             children: [
+              SizedBox(height: 10),
               const Text(
                 "Height",
                 style: TextStyle(fontSize: 25, color: Colors.black),

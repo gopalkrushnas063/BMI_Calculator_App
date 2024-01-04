@@ -5,6 +5,7 @@ class MyGridView extends StatelessWidget {
   final int height;
   final int weight;
   final int gender;
+  
 
   MyGridView({
     required this.age,
@@ -15,17 +16,31 @@ class MyGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.count(
-      crossAxisCount: 2,
-      children: [
-        buildInfoRow("assets/images/age.png", "Age : $age"),
-        buildInfoRow("assets/images/height.png", "Height : $height"),
-        buildInfoRow("assets/images/scale.png", "Weight : $weight"),
-        buildInfoRow(
-          gender == 0 ? "assets/images/female.png" : "assets/images/male.png",
-          gender == 0 ? "Female" : "Male",
-        ),
-      ],
+    return Scaffold(
+      body: ListView(
+        children: [
+          Padding(
+            padding: EdgeInsets.all(16.0),
+            child: GridView.count(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              crossAxisCount: 2,
+              crossAxisSpacing: 8.0,
+              mainAxisSpacing: 8.0,
+              childAspectRatio: 2.0,
+              children: [
+                buildInfoRow("assets/images/age.png", "Age : $age"),
+                buildInfoRow("assets/images/height.png", "Height : $height"),
+                buildInfoRow("assets/images/scale.png", "Weight : $weight"),
+                buildInfoRow(
+                  gender == 0 ? "assets/images/female.png" : "assets/images/male.png",
+                  gender == 0 ? "Female" : "Male",
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -63,6 +78,10 @@ class MyGridView extends StatelessWidget {
           child: Text(
             text,
             textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w400
+            ),
           ),
         ),
       ],

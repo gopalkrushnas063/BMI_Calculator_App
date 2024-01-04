@@ -1,6 +1,10 @@
 import 'dart:async';
 
+import 'package:bmi_calculator_app/bmi_category_list.dart';
+import 'package:bmi_calculator_app/bmi_history_page.dart';
+import 'package:bmi_calculator_app/helpers/database_helper.dart';
 import 'package:bmi_calculator_app/info_grid.dart';
+import 'package:bmi_calculator_app/model/bmi_record.dart';
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -41,10 +45,17 @@ class _ScoreScreenState extends State<ScoreScreen>
   late AnimationController _animationController;
   late Animation<double> _needleAnimation;
   late Animation<double> _scoreAnimation;
+  late DatabaseHelper dbHelper;
 
   @override
   void initState() {
     super.initState();
+    dbHelper = DatabaseHelper();
+    // Inserting a BMI record into the database
+    insertBMIRecord();
+
+    // Fetching all BMI records after inserting
+    fetchAllBMIRecords();
 
     _animationController = AnimationController(
       vsync: this,
@@ -76,6 +87,32 @@ class _ScoreScreenState extends State<ScoreScreen>
     super.dispose();
   }
 
+  void insertBMIRecord() async {
+    BMIRecord record = BMIRecord(
+      bmiScore: widget.bmiScore,
+      age: widget.age,
+      gender: widget.gender,
+      height: widget.height,
+      weight: widget.weight,
+    );
+    await dbHelper.insertBMIRecord(record);
+
+    // Wait for a short duration before fetching records
+    await Future.delayed(
+        Duration(milliseconds: 500)); // Adjust the delay time as needed
+
+    // Fetch records after insertion completes
+    fetchAllBMIRecords();
+  }
+
+  void fetchAllBMIRecords() async {
+    List<BMIRecord> records = await dbHelper.getBMIRecords();
+    for (var record in records) {
+      print(
+          "BMI Record - ID: ${record.id}, Score: ${record.bmiScore}, Age: ${record.age}, Gender: ${record.gender}, Height: ${record.height}, Weight: ${record.weight}");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Color baseColor = const Color(0xFFF2F2F2);
@@ -94,13 +131,12 @@ class _ScoreScreenState extends State<ScoreScreen>
           child: ClayContainer(
             borderRadius: 12,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-               
                 Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Container(
-                    height: 300,
+                    height: 180,
                     child: MyGridView(
                       age: widget.age,
                       height: widget.height,
@@ -109,15 +145,11 @@ class _ScoreScreenState extends State<ScoreScreen>
                     ),
                   ),
                 ),
-                const Text(
-                  "Your Score",
-                  style: TextStyle(fontSize: 30, color: Colors.blue),
-                ),
                 const SizedBox(
                   height: 10,
                 ),
                 PrettyGauge(
-                  gaugeSize: 300,
+                  gaugeSize: 200,
                   minValue: 0,
                   maxValue: 40,
                   segments: [
@@ -150,6 +182,7 @@ class _ScoreScreenState extends State<ScoreScreen>
                 const SizedBox(
                   height: 10,
                 ),
+                BMICategoryList(bmiScore: widget.bmiScore),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -183,6 +216,16 @@ class _ScoreScreenState extends State<ScoreScreen>
                         }
                       },
                       child: const Text("Share"),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => BMIHistoryPage()),
+                        );
+                      },
+                      child: Text('View BMI History'),
                     ),
                   ],
                 )
