@@ -1,9 +1,8 @@
 import 'dart:async';
-
-import 'package:bmi_calculator_app/bmi_category_list.dart';
-import 'package:bmi_calculator_app/bmi_history_page.dart';
+import 'package:bmi_calculator_app/pages/bmi_category_list.dart';
+import 'package:bmi_calculator_app/pages/bmi_history_page.dart';
 import 'package:bmi_calculator_app/helpers/database_helper.dart';
-import 'package:bmi_calculator_app/info_grid.dart';
+import 'package:bmi_calculator_app/pages/info_grid.dart';
 import 'package:bmi_calculator_app/model/bmi_record.dart';
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';

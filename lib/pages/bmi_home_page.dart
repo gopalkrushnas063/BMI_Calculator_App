@@ -1,9 +1,9 @@
 import 'dart:math';
 
-import 'package:bmi_calculator_app/age_weight_widget.dart';
-import 'package:bmi_calculator_app/gender_widget.dart';
-import 'package:bmi_calculator_app/height_widget.dart';
-import 'package:bmi_calculator_app/score_screen.dart';
+import 'package:bmi_calculator_app/widgets/age_weight_widget.dart';
+import 'package:bmi_calculator_app/widgets/gender_widget.dart';
+import 'package:bmi_calculator_app/widgets/height_widget.dart';
+import 'package:bmi_calculator_app/pages/score_screen.dart';
 import 'package:bmi_calculator_app/widgets/health_tip_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';

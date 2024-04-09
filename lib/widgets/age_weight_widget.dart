@@ -3,13 +3,9 @@ import 'package:flutter/material.dart';
 
 class AgeWeightWidget extends StatefulWidget {
   final Function(int) onChange;
-
   final String title;
-
   final int initValue;
-
   final int min;
-
   final int max;
 
   const AgeWeightWidget(
